@@ -1,0 +1,20 @@
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install feedparser
+      - run: |
+          python collect.py
+          if [ -f headlines.txt ]; then cat headlines.txt; else echo "headlines.txt not found"; exit 1; fi
+        working-directory: .
+      - name: Commit headlines.txt
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git add headlines.txt
+          git commit -m "Daily headlines update"
+          git push
