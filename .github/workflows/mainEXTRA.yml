@@ -15,12 +15,13 @@ jobs:
           python-version: '3.11'
       - run: pip install feedparser
       - run: |
-          python collect.py
-          cat headlines.txt
+          python collect.py || { echo "collect.py failed"; exit 1; }
+          if [ -f headlines.txt ]; then cat headlines.txt; else echo "headlines.txt not found"; exit 1; fi
+        working-directory: .
       - name: Commit headlines.txt
         run: |
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
           git add headlines.txt
-          git commit -m "Daily headlines update"
+          git commit -m "Daily headlines update" || echo "No changes to commit"
           git push
