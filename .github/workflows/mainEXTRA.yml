@@ -1,8 +1,5 @@
-name: Daily Collector
-
+name: legacy-daily-collector-manual-only
 on:
-  schedule:
-    - cron: '0 6 * * *'  # Runs daily at 06:00 UTC
   workflow_dispatch:
 
 jobs:
@@ -10,22 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}  # Use GITHUB_TOKEN for authentication
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       - run: pip install feedparser
-      - run: |
-          python collect.py || { echo "collect.py failed"; exit 1; }
-          if [ -f headlines.txt ]; then cat headlines.txt; else echo "headlines.txt not found"; exit 1; fi
-        working-directory: .
-      - name: Commit headlines.txt
-        run: |
-          git config user.name "GitHub Action"
-          git config user.email "action@github.com"
-          git add headlines.txt
-          git commit -m "Daily headlines update" || echo "No changes to commit"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Ensure token is available
+      - run: python collect.py
