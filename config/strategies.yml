@@ -1,0 +1,36 @@
+strategies:
+  - name: research_intelligence
+    description: Paid web research, competitor analysis, sourcing, verification and concise reports.
+    keywords: [research, competitor, comparison, sourcing, market, investigate, verify]
+    min_price_eur: 25
+    max_hours: 5
+    queries:
+      - '"web research" freelance remote paid'
+      - '"competitor research" freelance remote'
+      - '"market research" small project freelance'
+  - name: data_cleanup
+    description: Cleaning, normalizing, extracting, deduplicating and validating public/business data.
+    keywords: [data entry, cleanup, csv, spreadsheet, extraction, deduplicate, normalize, pdf]
+    min_price_eur: 20
+    max_hours: 5
+    queries:
+      - '"data cleanup" freelance remote'
+      - '"data extraction" freelance small project'
+      - '"CSV cleanup" freelance'
+  - name: automation_microbuild
+    description: Small Python, API, n8n and workflow jobs that can be scoped and verified quickly.
+    keywords: [automation, python, n8n, workflow, api, script, webhook]
+    min_price_eur: 40
+    max_hours: 8
+    queries:
+      - '"n8n" freelance small project'
+      - '"Python automation" freelance remote small task'
+      - '"API integration" freelance fixed price small'
+  - name: public_bounties
+    description: Explicit public software/data/documentation bounties with stated rewards and clear delivery requirements.
+    keywords: [bounty, reward, paid issue, prize]
+    min_price_eur: 20
+    max_hours: 10
+    queries:
+      - 'site:github.com/issues bounty reward open'
+      - 'open source bounty paid issue'

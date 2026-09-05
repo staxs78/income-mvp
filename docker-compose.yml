@@ -1,0 +1,17 @@
+services:
+  searxng:
+    image: searxng/searxng:latest
+    restart: unless-stopped
+    volumes:
+      - ./config/searxng-settings.yml:/etc/searxng/settings.yml:ro
+    ports: ["8080:8080"]
+  earning-swarm:
+    build: .
+    restart: unless-stopped
+    env_file: [.env]
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    depends_on: [searxng]
+    volumes:
+      - ./data:/app/data
+      - ./outbox:/app/outbox
+      - ./config:/app/config:ro
